@@ -1,28 +1,30 @@
-﻿using System;
-using System.Diagnostics.Contracts;
-using cars;
-using gay;
-
-namespace democlass
+﻿using veichles;
+class Program
 {
-    class Program
+    static void Main(string[] args)
+
     {
-        static void Main(string[] args)
+        Car myCar = new Car("Red", 10, "Toyota");
+        myCar.Move();
+        myCar.Honk();
+
+        Bike myBike = new Bike("Blue", 30, true);
+        myBike.Move();
+        myBike.Honk();
+
+        /* correcting car speed, running 100km in one hour
+        while (myCar.Run(100) >= 1)
         {
-            calculator3 calculator3 = new calculator3();
-            int result = calculator3.add(35, 10);
-            Console.WriteLine("Result: " + result);
-
+            myCar.speed += 1;
+            Console.WriteLine($"Car speed increased to: {myCar.speed} km/h");
+            Thread.Sleep(500);
         }
-
+        Console.WriteLine($"Car reached the destination in: 1 hours");
+        */
+        myCar.InputTrunk("books");
+        myCar.InputTrunk("laptop");
+        myCar.OpenTrunk();
+   
     }
 
-    public class calculator3
-    {
-        public int add(int a, int b)
-        {
-
-            return a + b;
-        }
-    }
 }
