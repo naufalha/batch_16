@@ -27,13 +27,35 @@ class Program
         Chicken Sari = new Chicken("Sari", 6);
         Cow Dodi = new Cow("Dodi", 690);
         Chicken Rina = new Chicken("Rina", 5);
-    
+        Cow Eko = new Cow("Eko", 710);
+        Chicken Tini = new Chicken("Tini", 4);
+
+
+        Fuad.CurrentYield = new Cow.MilkYield { Liters = 18, Status = HarvestStatus.Ready };
+        Budi.CurrentYield = new Cow.MilkYield { Liters = 22, Status = HarvestStatus.NeedsTime };
+        Ani.CurrentYield = new Chicken.EggYield { Count = 10, Status = HarvestStatus.Ready };
+        Sari.CurrentYield = new Chicken.EggYield { Count = 14, Status = HarvestStatus.NeedsTime };
 
 
         //report
         FarmEnclosure<Cow> cowEnclosure = new FarmEnclosure<Cow>();
 
         FarmEnclosure<Chicken> chickenEnclosure = new FarmEnclosure<Chicken>();
+
+        cowEnclosure.AddAnimal(Ambatukam);
+        cowEnclosure.AddAnimal(Fuad);
+        cowEnclosure.AddAnimal(Budi);
+        cowEnclosure.AddAnimal(Dodi);
+        cowEnclosure.AddAnimal(Eko);
+        chickenEnclosure.AddAnimal(Rusdi);
+        chickenEnclosure.AddAnimal(Ani);
+        chickenEnclosure.AddAnimal(Sari);
+        chickenEnclosure.AddAnimal(Rina);
+        chickenEnclosure.AddAnimal(Tini);
+
+        cowEnclosure.CheckStatus();
+        chickenEnclosure.CheckStatus(); 
+
 
         Console.WriteLine(cowEnclosure.GenerateReport());
         Console.WriteLine(chickenEnclosure.GenerateReport());
