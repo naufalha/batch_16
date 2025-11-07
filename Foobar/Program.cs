@@ -2,7 +2,7 @@
 {
     public static void Main(string[] args)
     {
-        int n = 30;
+        int n = 1;
         for (int i = 1; i <= n; i++)
         {
             if (i % 15 == 0)

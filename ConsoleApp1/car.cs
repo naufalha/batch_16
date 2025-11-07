@@ -66,7 +66,7 @@ namespace veichles
     public class Car : Veichles
     {
         public string model;
-        private string[] _itemsInTrunk = [];
+        public List<string> _itemsInTrunk = new List<string>();
 
     
         public Car(string color, int speed, string model) : base(color, speed)
@@ -79,7 +79,7 @@ namespace veichles
         }
         public void InputTrunk(string items)
         {
-            _itemsInTrunk.Append(items);
+            _itemsInTrunk.Add(items);
         }
         public void OpenTrunk()
         {
@@ -90,6 +90,11 @@ namespace veichles
         public string GetItemsInTrunk(int index)
         {
             return _itemsInTrunk[index];
+        }
+
+        public List<string> GetAllItemsInTrunk()
+        {
+            return _itemsInTrunk;
         }
     }
     public class Bike : Veichles

@@ -24,6 +24,13 @@ class Program
         myCar.InputTrunk("books");
         myCar.InputTrunk("laptop");
         myCar.OpenTrunk();
+        var allItemInTrunk = myCar.GetAllItemsInTrunk();
+
+        foreach (var item in allItemInTrunk)
+        {
+            System.Console.WriteLine(item);
+        }
+        System.Console.WriteLine($"First item in trunk: {myCar.GetItemsInTrunk(0)}");
    
     }
 

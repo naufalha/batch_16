@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Foobar", "Foobar\Foobar.csproj", "{A753B3F1-E51C-4890-9289-D9F5EC1D2D83}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PracticeTypes", "PracticeTypes\PracticeTypes.csproj", "{18C28213-0F4D-483E-AD26-275C5F850903}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,18 @@ Global
 		{A753B3F1-E51C-4890-9289-D9F5EC1D2D83}.Release|x64.Build.0 = Release|Any CPU
 		{A753B3F1-E51C-4890-9289-D9F5EC1D2D83}.Release|x86.ActiveCfg = Release|Any CPU
 		{A753B3F1-E51C-4890-9289-D9F5EC1D2D83}.Release|x86.Build.0 = Release|Any CPU
+		{18C28213-0F4D-483E-AD26-275C5F850903}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18C28213-0F4D-483E-AD26-275C5F850903}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18C28213-0F4D-483E-AD26-275C5F850903}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{18C28213-0F4D-483E-AD26-275C5F850903}.Debug|x64.Build.0 = Debug|Any CPU
+		{18C28213-0F4D-483E-AD26-275C5F850903}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{18C28213-0F4D-483E-AD26-275C5F850903}.Debug|x86.Build.0 = Debug|Any CPU
+		{18C28213-0F4D-483E-AD26-275C5F850903}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18C28213-0F4D-483E-AD26-275C5F850903}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18C28213-0F4D-483E-AD26-275C5F850903}.Release|x64.ActiveCfg = Release|Any CPU
+		{18C28213-0F4D-483E-AD26-275C5F850903}.Release|x64.Build.0 = Release|Any CPU
+		{18C28213-0F4D-483E-AD26-275C5F850903}.Release|x86.ActiveCfg = Release|Any CPU
+		{18C28213-0F4D-483E-AD26-275C5F850903}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

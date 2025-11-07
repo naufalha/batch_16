@@ -1,0 +1,15 @@
+C:\Users\naufal\Documents\batch_16\PracticeTypes\bin\Debug\net9.0\PracticeTypes.exe
+C:\Users\naufal\Documents\batch_16\PracticeTypes\bin\Debug\net9.0\PracticeTypes.deps.json
+C:\Users\naufal\Documents\batch_16\PracticeTypes\bin\Debug\net9.0\PracticeTypes.runtimeconfig.json
+C:\Users\naufal\Documents\batch_16\PracticeTypes\bin\Debug\net9.0\PracticeTypes.dll
+C:\Users\naufal\Documents\batch_16\PracticeTypes\bin\Debug\net9.0\PracticeTypes.pdb
+C:\Users\naufal\Documents\batch_16\PracticeTypes\obj\Debug\net9.0\PracticeTypes.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\naufal\Documents\batch_16\PracticeTypes\obj\Debug\net9.0\PracticeTypes.AssemblyInfoInputs.cache
+C:\Users\naufal\Documents\batch_16\PracticeTypes\obj\Debug\net9.0\PracticeTypes.AssemblyInfo.cs
+C:\Users\naufal\Documents\batch_16\PracticeTypes\obj\Debug\net9.0\PracticeTypes.csproj.CoreCompileInputs.cache
+C:\Users\naufal\Documents\batch_16\PracticeTypes\obj\Debug\net9.0\PracticeTypes.sourcelink.json
+C:\Users\naufal\Documents\batch_16\PracticeTypes\obj\Debug\net9.0\PracticeTypes.dll
+C:\Users\naufal\Documents\batch_16\PracticeTypes\obj\Debug\net9.0\refint\PracticeTypes.dll
+C:\Users\naufal\Documents\batch_16\PracticeTypes\obj\Debug\net9.0\PracticeTypes.pdb
+C:\Users\naufal\Documents\batch_16\PracticeTypes\obj\Debug\net9.0\PracticeTypes.genruntimeconfig.cache
+C:\Users\naufal\Documents\batch_16\PracticeTypes\obj\Debug\net9.0\ref\PracticeTypes.dll
