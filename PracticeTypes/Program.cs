@@ -66,6 +66,15 @@ namespace MyZooProject
             FeedAnimal(Lele);
             FeedAnimal(lion);
             FeedAnimal(UnknownAnimal);
+
+
+            //adding coordinates of animal with struct through Enclosure class
+            lionEnclosure.EnclosureLocation = new Location { X = 10, Y = 20 };
+            Console.WriteLine($"Lion Enclosure Location: X={lionEnclosure.EnclosureLocation.X}, Y={lionEnclosure.EnclosureLocation.Y}");
+            fishEnclosure.EnclosureLocation = new Location(5, 15);
+            Console.WriteLine($"Fish Enclosure Location: X={fishEnclosure.EnclosureLocation.X}, Y={fishEnclosure.EnclosureLocation.Y}");    
+            birdEnclosure.EnclosureLocation = new Location { X = 8, Y = 12 };
+            Console.WriteLine($"Bird Enclosure Location: X={birdEnclosure.EnclosureLocation.X}, Y={birdEnclosure.EnclosureLocation.Y}");    
             
         }
             public static void FeedAnimal(Animal animal)

@@ -21,5 +21,8 @@ namespace MyZooProject
                 Console.WriteLine($"- {animal.Name} the {animal.Species}");
             }
         }
+        //usage of struct Coordinates location
+        public Location EnclosureLocation { get; set; }
+
     }
 }
