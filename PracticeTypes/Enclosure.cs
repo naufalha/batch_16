@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System;
 namespace MyZooProject
 {
     //step 5 : Generic Collections
@@ -23,6 +24,37 @@ namespace MyZooProject
         }
         //usage of struct Coordinates location
         public Location EnclosureLocation { get; set; }
+        //nested types can also be defined within generic classes
+        //its help to manage enclosure environment
+        //private to restrict access from outside
+        private class MaintenanceLog
+        {
+            public DateTime LastCleaned { get; set; }
+            public string Notes { get; set; }
+            public MaintenanceLog(DateTime date, string notes)
+            {
+                LastCleaned = DateTime.Now;
+                Notes = notes;
+            }
 
+        }
+        //a list to old the nested types
+        private List<MaintenanceLog> logs = new List<MaintenanceLog>();
+        //method to add maintenance log
+        public void PerformMaintenance(string notes)
+        {
+            MaintenanceLog log = new MaintenanceLog(DateTime.Now, notes);
+            logs.Add(log);
+            Console.WriteLine($"Performed maintenance on {typeof(TAnimal).Name} enclosure at {log.LastCleaned}: {log.Notes}");
+        }
+        //method to display maintenance logs
+        public void DisplayMaintenanceLogs()
+        {
+            Console.WriteLine($"===Maintenance Logs for {typeof(TAnimal).Name} Enclosure===");
+            foreach (var log in logs)
+            {
+                Console.WriteLine($"- Last Cleaned: {log.LastCleaned}, Notes: {log.Notes}");
+            }
+        }
     }
 }

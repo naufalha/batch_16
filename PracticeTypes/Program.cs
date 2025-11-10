@@ -72,10 +72,28 @@ namespace MyZooProject
             lionEnclosure.EnclosureLocation = new Location { X = 10, Y = 20 };
             Console.WriteLine($"Lion Enclosure Location: X={lionEnclosure.EnclosureLocation.X}, Y={lionEnclosure.EnclosureLocation.Y}");
             fishEnclosure.EnclosureLocation = new Location(5, 15);
-            Console.WriteLine($"Fish Enclosure Location: X={fishEnclosure.EnclosureLocation.X}, Y={fishEnclosure.EnclosureLocation.Y}");    
+            Console.WriteLine($"Fish Enclosure Location: X={fishEnclosure.EnclosureLocation.X}, Y={fishEnclosure.EnclosureLocation.Y}");
             birdEnclosure.EnclosureLocation = new Location { X = 8, Y = 12 };
-            Console.WriteLine($"Bird Enclosure Location: X={birdEnclosure.EnclosureLocation.X}, Y={birdEnclosure.EnclosureLocation.Y}");    
-            
+            Console.WriteLine($"Bird Enclosure Location: X={birdEnclosure.EnclosureLocation.X}, Y={birdEnclosure.EnclosureLocation.Y}");
+
+            //perform maintenance on enclosures
+            lionEnclosure.PerformMaintenance("Cleaned and restocked water.");
+            birdEnclosure.PerformMaintenance("Replaced bedding and cleaned feeders.");
+            fishEnclosure.PerformMaintenance("Changed water and cleaned tank.");
+            lionEnclosure.PerformMaintenance("General cleaning and health check.");
+            birdEnclosure.PerformMaintenance("Trimmed wings and cleaned perches.");
+            fishEnclosure.PerformMaintenance("Checked filtration system and cleaned algae.");
+
+            //display maintenance logs
+            lionEnclosure.DisplayMaintenanceLogs();
+            birdEnclosure.DisplayMaintenanceLogs();
+            fishEnclosure.DisplayMaintenanceLogs();
+
+
+
+
+
+
         }
             public static void FeedAnimal(Animal animal)
             {
