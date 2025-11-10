@@ -29,6 +29,7 @@ class Program
         Chicken Rina = new Chicken("Rina", 5);
         Cow Eko = new Cow("Eko", 710);
         Chicken Tini = new Chicken("Tini", 4);
+        
 
 
         Fuad.CurrentYield = new Cow.MilkYield { Liters = 18, Status = HarvestStatus.Ready };

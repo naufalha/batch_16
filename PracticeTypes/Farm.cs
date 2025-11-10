@@ -172,6 +172,7 @@ namespace FarmingSimulation
             };
         }   
 
+        // Additional methods for managing the enclosure can be added here.
         
     }
 }
