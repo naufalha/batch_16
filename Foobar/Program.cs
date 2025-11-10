@@ -1,32 +1,40 @@
-﻿public class FooBar
+﻿using System;
+
+public class Program
 {
     public static void Main(string[] args)
     {
-        int n = 1;
-        for (int i = 1; i <= n; i++)
+        int batasAkhir = 105;
+
+        Console.WriteLine($"---  FooBarJazz (Sampai Angka {batasAkhir}) ---");
+
+        for (int x = 1; x <= batasAkhir; x++)
         {
-            if (i % 15 == 0)
+            string hasilKombo = "";
+
+            if (x % 3 == 0)
             {
-                Console.Write("foobar");
+                hasilKombo += "foo";
             }
-            else if (i % 3 == 0)
+
+            if (x % 5 == 0)
             {
-                Console.Write("foo");
+                hasilKombo += "bar";
             }
-            else if (i % 5 == 0)
+
+            if (x % 7 == 0)
             {
-                Console.Write("bar");
+                hasilKombo += "jazz";
+            }
+
+            if (hasilKombo.Length > 0)
+            {
+                Console.WriteLine(hasilKombo);
             }
             else
             {
-                Console.Write(i);
-            }
-
-            if (i < n)
-            {
-                Console.Write(", ");
+                Console.WriteLine(x);
             }
         }
-        Console.WriteLine();
     }
 }
