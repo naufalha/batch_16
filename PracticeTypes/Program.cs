@@ -89,11 +89,6 @@ namespace MyZooProject
             birdEnclosure.DisplayMaintenanceLogs();
             fishEnclosure.DisplayMaintenanceLogs();
 
-
-
-
-
-
         }
             public static void FeedAnimal(Animal animal)
             {
