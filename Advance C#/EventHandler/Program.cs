@@ -44,6 +44,18 @@
             Console.WriteLine("$[EmailService]:Mengirim email pemberitahuan bahwa video telah selesai di encode");
 
         }
+
+
+    }
+    public class SMSService
+    {
+        //multicaset event handler
+        //membuat classsebanyak kita mau 
+        //membuat method sesuai dengan delegate
+        public void OnVideoEncoded()
+        {
+            Console.WriteLine($"[SMSService]:Mengirim SMS pemberitahuan bahwa video telah selesai di encode");
+        }
     }
     
     class Program
@@ -59,6 +71,11 @@
             videoEncoder.Encode(video);
             //tidaka da subscribe maka tidak akan ada output setelah encoding
             Console.WriteLine("langkah 2.2 selesai subscribe event");
+            //menambahkan subscriber kedua
+            var SMSService = new SMSService();
+            videoEncoder.VideoEncoded += SMSService.OnVideoEncoded;
+            videoEncoder.Encode(video);
+            Console.WriteLine("langkah 2.3 selesai menambahkan subscriber kedua");
         
         }
     }
