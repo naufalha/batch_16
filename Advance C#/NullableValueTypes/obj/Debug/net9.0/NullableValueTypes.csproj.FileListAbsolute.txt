@@ -1,0 +1,15 @@
+C:\Users\naufal\Documents\batch_16\Advance C#\NullableValueTypes\obj\Debug\net9.0\NullableValueTypes.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\naufal\Documents\batch_16\Advance C#\NullableValueTypes\obj\Debug\net9.0\NullableValueTypes.AssemblyInfoInputs.cache
+C:\Users\naufal\Documents\batch_16\Advance C#\NullableValueTypes\obj\Debug\net9.0\NullableValueTypes.AssemblyInfo.cs
+C:\Users\naufal\Documents\batch_16\Advance C#\NullableValueTypes\obj\Debug\net9.0\NullableValueTypes.csproj.CoreCompileInputs.cache
+C:\Users\naufal\Documents\batch_16\Advance C#\NullableValueTypes\obj\Debug\net9.0\NullableValueTypes.sourcelink.json
+C:\Users\naufal\Documents\batch_16\Advance C#\NullableValueTypes\bin\Debug\net9.0\NullableValueTypes.exe
+C:\Users\naufal\Documents\batch_16\Advance C#\NullableValueTypes\bin\Debug\net9.0\NullableValueTypes.deps.json
+C:\Users\naufal\Documents\batch_16\Advance C#\NullableValueTypes\bin\Debug\net9.0\NullableValueTypes.runtimeconfig.json
+C:\Users\naufal\Documents\batch_16\Advance C#\NullableValueTypes\bin\Debug\net9.0\NullableValueTypes.dll
+C:\Users\naufal\Documents\batch_16\Advance C#\NullableValueTypes\bin\Debug\net9.0\NullableValueTypes.pdb
+C:\Users\naufal\Documents\batch_16\Advance C#\NullableValueTypes\obj\Debug\net9.0\NullableValueTypes.dll
+C:\Users\naufal\Documents\batch_16\Advance C#\NullableValueTypes\obj\Debug\net9.0\refint\NullableValueTypes.dll
+C:\Users\naufal\Documents\batch_16\Advance C#\NullableValueTypes\obj\Debug\net9.0\NullableValueTypes.pdb
+C:\Users\naufal\Documents\batch_16\Advance C#\NullableValueTypes\obj\Debug\net9.0\NullableValueTypes.genruntimeconfig.cache
+C:\Users\naufal\Documents\batch_16\Advance C#\NullableValueTypes\obj\Debug\net9.0\ref\NullableValueTypes.dll
