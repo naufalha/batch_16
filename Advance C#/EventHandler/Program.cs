@@ -3,7 +3,7 @@
     //klas data sederhana untuk video kita
     public class Video
     {
-        public string Judul { get; set; }
+        public string Judul { get; set; } = string.Empty;
     }
 
     //event pulbisher
@@ -12,7 +12,7 @@
         //define delegate
         public delegate void VideoEncodedEventHandler();
         //define event
-        public event VideoEncodedEventHandler VideoEncoded;
+        public event VideoEncodedEventHandler? VideoEncoded;
         //method to raise event
         public void Encode(Video vidio)
         {
@@ -36,6 +36,15 @@
             }
         }
     }
+    public class EmailService
+    {
+        //event handler signature harus sama dengan delegate vidio encode event handler
+        public void OnVideoEncoded()
+        {
+            Console.WriteLine("$[EmailService]:Mengirim email pemberitahuan bahwa video telah selesai di encode");
+
+        }
+    }
     
     class Program
     {
@@ -44,9 +53,13 @@
             Console.WriteLine("Latihan Event Handler langkah 2.1 publisher");
             var video = new Video() { Judul = "Tutorial Event Handler di C#" };
             var videoEncoder = new VideoEncoder();
-            //subscribe event
+            //subscribe event dan memanggil method onvideoencoded di emailservice
+            var EmailService = new EmailService();
+            videoEncoder.VideoEncoded += EmailService.OnVideoEncoded;
+            videoEncoder.Encode(video);
             //tidaka da subscribe maka tidak akan ada output setelah encoding
-            Console.WriteLine("langkah 2.1 publish even selesah");
+            Console.WriteLine("langkah 2.2 selesai subscribe event");
+        
         }
     }
 }
