@@ -1,0 +1,15 @@
+C:\Users\naufal\Documents\batch_16\Advance C#\OperatorOverloading\bin\Debug\net9.0\OperatorOverloading.exe
+C:\Users\naufal\Documents\batch_16\Advance C#\OperatorOverloading\bin\Debug\net9.0\OperatorOverloading.deps.json
+C:\Users\naufal\Documents\batch_16\Advance C#\OperatorOverloading\bin\Debug\net9.0\OperatorOverloading.runtimeconfig.json
+C:\Users\naufal\Documents\batch_16\Advance C#\OperatorOverloading\bin\Debug\net9.0\OperatorOverloading.dll
+C:\Users\naufal\Documents\batch_16\Advance C#\OperatorOverloading\bin\Debug\net9.0\OperatorOverloading.pdb
+C:\Users\naufal\Documents\batch_16\Advance C#\OperatorOverloading\obj\Debug\net9.0\OperatorOverloading.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\naufal\Documents\batch_16\Advance C#\OperatorOverloading\obj\Debug\net9.0\OperatorOverloading.AssemblyInfoInputs.cache
+C:\Users\naufal\Documents\batch_16\Advance C#\OperatorOverloading\obj\Debug\net9.0\OperatorOverloading.AssemblyInfo.cs
+C:\Users\naufal\Documents\batch_16\Advance C#\OperatorOverloading\obj\Debug\net9.0\OperatorOverloading.csproj.CoreCompileInputs.cache
+C:\Users\naufal\Documents\batch_16\Advance C#\OperatorOverloading\obj\Debug\net9.0\OperatorOverloading.sourcelink.json
+C:\Users\naufal\Documents\batch_16\Advance C#\OperatorOverloading\obj\Debug\net9.0\OperatorOverloading.dll
+C:\Users\naufal\Documents\batch_16\Advance C#\OperatorOverloading\obj\Debug\net9.0\refint\OperatorOverloading.dll
+C:\Users\naufal\Documents\batch_16\Advance C#\OperatorOverloading\obj\Debug\net9.0\OperatorOverloading.pdb
+C:\Users\naufal\Documents\batch_16\Advance C#\OperatorOverloading\obj\Debug\net9.0\OperatorOverloading.genruntimeconfig.cache
+C:\Users\naufal\Documents\batch_16\Advance C#\OperatorOverloading\obj\Debug\net9.0\ref\OperatorOverloading.dll
