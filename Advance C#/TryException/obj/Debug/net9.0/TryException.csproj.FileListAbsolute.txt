@@ -1,0 +1,15 @@
+C:\Users\naufal\Documents\batch_16\Advance C#\TryException\bin\Debug\net9.0\TryException.exe
+C:\Users\naufal\Documents\batch_16\Advance C#\TryException\bin\Debug\net9.0\TryException.deps.json
+C:\Users\naufal\Documents\batch_16\Advance C#\TryException\bin\Debug\net9.0\TryException.runtimeconfig.json
+C:\Users\naufal\Documents\batch_16\Advance C#\TryException\bin\Debug\net9.0\TryException.dll
+C:\Users\naufal\Documents\batch_16\Advance C#\TryException\bin\Debug\net9.0\TryException.pdb
+C:\Users\naufal\Documents\batch_16\Advance C#\TryException\obj\Debug\net9.0\TryException.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\naufal\Documents\batch_16\Advance C#\TryException\obj\Debug\net9.0\TryException.AssemblyInfoInputs.cache
+C:\Users\naufal\Documents\batch_16\Advance C#\TryException\obj\Debug\net9.0\TryException.AssemblyInfo.cs
+C:\Users\naufal\Documents\batch_16\Advance C#\TryException\obj\Debug\net9.0\TryException.csproj.CoreCompileInputs.cache
+C:\Users\naufal\Documents\batch_16\Advance C#\TryException\obj\Debug\net9.0\TryException.sourcelink.json
+C:\Users\naufal\Documents\batch_16\Advance C#\TryException\obj\Debug\net9.0\TryException.dll
+C:\Users\naufal\Documents\batch_16\Advance C#\TryException\obj\Debug\net9.0\refint\TryException.dll
+C:\Users\naufal\Documents\batch_16\Advance C#\TryException\obj\Debug\net9.0\TryException.pdb
+C:\Users\naufal\Documents\batch_16\Advance C#\TryException\obj\Debug\net9.0\TryException.genruntimeconfig.cache
+C:\Users\naufal\Documents\batch_16\Advance C#\TryException\obj\Debug\net9.0\ref\TryException.dll
