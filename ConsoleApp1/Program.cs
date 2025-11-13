@@ -32,6 +32,7 @@ class Program
         }
         System.Console.WriteLine($"First item in trunk: {myCar.GetItemsInTrunk(0)}");
    
+        Console.ReadKey();
     }
 
 }
