@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TryException")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9a69acf4514276edc587cfc7fa8e82ba140b0abb")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c8b026339dd0eade2cb848e25a98801d369e8b0a")]
 [assembly: System.Reflection.AssemblyProductAttribute("TryException")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TryException")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
