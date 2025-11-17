@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 
 public class Program
 {
@@ -6,35 +7,53 @@ public class Program
     {
         int batasAkhir = 105;
 
-        Console.WriteLine($"---  FooBarJazz (Sampai Angka {batasAkhir}) ---");
+        Console.WriteLine($"--- Combo Output Sampai Angka {batasAkhir} ---");
 
         for (int x = 1; x <= batasAkhir; x++)
         {
-            string hasilKombo = "";
+            StringBuilder sb = new StringBuilder();
 
-            if (x % 3 == 0)
+            // Switch-case appending each string to a setring builder object
+            switch (true)
             {
-                hasilKombo += "foo";
+                case bool when x % 3 == 0:
+                    sb.Append("foo");
+                    break;
             }
 
-            if (x % 5 == 0)
+            switch (true)
             {
-                hasilKombo += "bar";
+                case bool when x % 4 == 0:
+                    sb.Append("baz");
+                    break;
             }
 
-            if (x % 7 == 0)
+            switch (true)
             {
-                hasilKombo += "jazz";
+                case bool when x % 5 == 0:
+                    sb.Append("bar");
+                    break;
             }
 
-            if (hasilKombo.Length > 0)
+            switch (true)
             {
-                Console.WriteLine(hasilKombo);
+                case bool when x % 7 == 0:
+                    sb.Append("jazz");
+                    break;
             }
-            else
+
+            switch (true)
             {
+                case bool when x % 9 == 0:
+                    sb.Append("huzz");
+                    break;
+            }
+
+            // Kalau gak ada aturan yang match → print angka
+            if (sb.Length == 0)
                 Console.WriteLine(x);
-            }
+            else
+                Console.WriteLine(sb.ToString());
         }
     }
 }
