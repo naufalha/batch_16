@@ -43,6 +43,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "String and text handling", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FundamentalFrameworkApp", "FundamentalFrameworkFolder\FundamentalFrameworkApp\FundamentalFrameworkApp.csproj", "{6012E755-CF54-474A-A616-DBAD259ED745}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "OtelloProject", "OtelloProject", "{D6A27F2C-04D2-618A-D74B-8D6074D2BD57}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Otello", "OtelloProject\Otello\Otello.csproj", "{FBD60A58-E4FA-44E7-B222-C2BF39E45024}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -221,6 +225,18 @@ Global
 		{6012E755-CF54-474A-A616-DBAD259ED745}.Release|x64.Build.0 = Release|Any CPU
 		{6012E755-CF54-474A-A616-DBAD259ED745}.Release|x86.ActiveCfg = Release|Any CPU
 		{6012E755-CF54-474A-A616-DBAD259ED745}.Release|x86.Build.0 = Release|Any CPU
+		{FBD60A58-E4FA-44E7-B222-C2BF39E45024}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBD60A58-E4FA-44E7-B222-C2BF39E45024}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBD60A58-E4FA-44E7-B222-C2BF39E45024}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{FBD60A58-E4FA-44E7-B222-C2BF39E45024}.Debug|x64.Build.0 = Debug|Any CPU
+		{FBD60A58-E4FA-44E7-B222-C2BF39E45024}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FBD60A58-E4FA-44E7-B222-C2BF39E45024}.Debug|x86.Build.0 = Debug|Any CPU
+		{FBD60A58-E4FA-44E7-B222-C2BF39E45024}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBD60A58-E4FA-44E7-B222-C2BF39E45024}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FBD60A58-E4FA-44E7-B222-C2BF39E45024}.Release|x64.ActiveCfg = Release|Any CPU
+		{FBD60A58-E4FA-44E7-B222-C2BF39E45024}.Release|x64.Build.0 = Release|Any CPU
+		{FBD60A58-E4FA-44E7-B222-C2BF39E45024}.Release|x86.ActiveCfg = Release|Any CPU
+		{FBD60A58-E4FA-44E7-B222-C2BF39E45024}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -238,5 +254,6 @@ Global
 		{FB9829DF-FCFB-4D22-A7A1-3671B0B080AF} = {4DC6CAF4-B4F5-BA3C-5C3F-8E5011477FCB}
 		{25D5462A-80F5-4B41-953F-07751101898E} = {8F720A5D-3118-583F-67F9-EC6E94B748E9}
 		{6012E755-CF54-474A-A616-DBAD259ED745} = {8F720A5D-3118-583F-67F9-EC6E94B748E9}
+		{FBD60A58-E4FA-44E7-B222-C2BF39E45024} = {D6A27F2C-04D2-618A-D74B-8D6074D2BD57}
 	EndGlobalSection
 EndGlobal

@@ -1,161 +1,119 @@
 ﻿using System;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace OthelloPrototype
+namespace BoardExample
 {
-    // The Game class is the main orchestrator.
-    public class Game
+    // Generic 8x8 board
+    public class Board<T>
     {
-        private readonly Board _board;
-        private readonly IPlayer _player1;
-        private readonly IPlayer _player2;
+        public const int Rows = 8;
+        public const int Cols = 8;
+        private readonly T[,] _grid;
 
-        private IPlayer _currentPlayer;
-
-        // Action delegates for events
-        public event Action<Board> OnBoardUpdated;
-        public event Action<string> OnGameMessage;
-
-        public Game(IPlayer player1, IPlayer player2, Board board)
+        public Board()
         {
-            _player1 = player1;
-            _player2 = player2;
-            _board = board;
-
-            // Black always goes first
-            _currentPlayer = _player1.Color == DiscColor.Black ? _player1 : _player2;
+            _grid = new T[Rows, Cols];
         }
 
-        public async Task RunGame()
+        // Indexer
+        public T this[int row, int col]
         {
-            _board.Initialize();
-            OnBoardUpdated?.Invoke(_board); // Fire event for initial state
-
-            bool player1Passed = false;
-            bool player2Passed = false;
-
-            while (true)
+            get
             {
-                // 1. Get move from current player
-                Move move = await _currentPlayer.GetMoveAsync(_board);
-
-                if (move == null)
-                {
-                    // Player must pass
-                    OnGameMessage?.Invoke($"Player {_currentPlayer.Color} passes.");
-                    if (_currentPlayer == _player1) player1Passed = true;
-                    if (_currentPlayer == _player2) player2Passed = true;
-                }
-                else
-                {
-                    // Player made a move
-                    if (_currentPlayer == _player1) player1Passed = false;
-                    if (_currentPlayer == _player2) player2Passed = false;
-
-                    // 2. Apply the valid move
-                    _board.SetCell(move.Row, move.Column, _currentPlayer.Color);
-                    foreach (var cellToFlip in move.FlippableCells)
-                    {
-                        _board.SetCell(cellToFlip.Row, cellToFlip.Col, _currentPlayer.Color);
-                    }
-                }
-                
-                // 3. Fire event to notify subscribers (the console UI)
-                OnBoardUpdated?.Invoke(_board);
-
-                // 4. Check for Game Over condition (both players passed)
-                if (player1Passed && player2Passed)
-                {
-                    OnGameMessage?.Invoke("Both players passed. Game Over!");
-                    break;
-                }
-
-                // 5. Swap turns
-                SwitchTurn();
+                Validate(row, col);
+                return _grid[row, col];
             }
-
-            AnnounceWinner();
-        }
-
-        private void SwitchTurn()
-        {
-            _currentPlayer = (_currentPlayer == _player1) ? _player2 : _player1;
-        }
-        
-        private void AnnounceWinner()
-        {
-            int blackScore = 0;
-            int whiteScore = 0;
-            for(int r = 0; r < 8; r++)
+            set
             {
-                for (int c = 0; c < 8; c++)
-                {
-                    if (_board.GetCell(r,c).Color == DiscColor.Black) blackScore++;
-                    if (_board.GetCell(r,c).Color == DiscColor.White) whiteScore++;
-                }
+                Validate(row, col);
+                _grid[row, col] = value;
             }
-            OnGameMessage?.Invoke($"Final Score: Black-{blackScore} | White-{whiteScore}");
-            if (blackScore > whiteScore) OnGameMessage?.Invoke("Black wins!");
-            else if (whiteScore > blackScore) OnGameMessage?.Invoke("White wins!");
-            else OnGameMessage?.Invoke("It's a draw!");
+        }
+
+        // Clear the board by setting default(T)
+        public void Clear()
+        {
+            for (int r = 0; r < Rows; r++)
+                for (int c = 0; c < Cols; c++)
+                    _grid[r, c] = default!;
+        }
+
+        // Fill with a value
+        public void Fill(T value)
+        {
+            for (int r = 0; r < Rows; r++)
+                for (int c = 0; c < Cols; c++)
+                    _grid[r, c] = value;
+        }
+
+        // Simple console printer. Provide a formatter for custom representation.
+        public void PrintConsole(Func<T, string>? formatter = null)
+        {
+            formatter ??= (v => v?.ToString() ?? ".");
+            Console.WriteLine("  0 1 2 3 4 5 6 7");
+            for (int r = 0; r < Rows; r++)
+            {
+                Console.Write(r + " ");
+                for (int c = 0; c < Cols; c++)
+                {
+                    string s = formatter(_grid[r, c]);
+                    // keep cell width to 1 char if possible, or pad/truncate
+                    if (s.Length == 0) s = ".";
+                    Console.Write(s[0] + " ");
+                }
+                Console.WriteLine();
+            }
+        }
+
+        // Validate coordinates
+        private static void Validate(int row, int col)
+        {
+            if (row < 0 || row >= Rows || col < 0 || col >= Cols)
+                throw new IndexOutOfRangeException($"Coordinates out of range: ({row},{col})");
         }
     }
 
-    // Program class is the entry point and Console UI
-    public class Program
+    // Example usage
+    class Program
     {
-        public static async Task Main(string[] args)
+        static void Main()
         {
-            // 1. Create all the dependencies
-            var board = new Board();
-            var validator = new StandardOthelloValidator();
-            var player1 = new HumanPlayer(DiscColor.Black, validator);
-            var player2 = new HumanPlayer(DiscColor.White, validator);
+            // Example 1: simple char board (like chessboard visual)
+            var charBoard = new Board<char>();
+            charBoard.Fill('.');            // default empty cell character
+            charBoard[0, 0] = 'R';         // place a rook (example)
+            charBoard[0, 1] = 'N';         // knight
+            charBoard[7, 7] = 'K';         // king
 
-            // 2. Inject dependencies into the Game
-            var game = new Game(player1, player2, board);
+            Console.WriteLine("Char board:");
+            charBoard.PrintConsole(ch => ch == '\0' ? "." : ch.ToString());
 
-            // 3. Subscribe to events to create the UI
-            game.OnBoardUpdated += PrintBoard;
-            game.OnGameMessage += (message) => 
+            // Example 2: bool board (like visited cells)
+            var visited = new Board<bool>();
+            visited.Clear();
+            visited[3, 4] = true;
+            Console.WriteLine("\nVisited board (1 = true, . = false):");
+            visited.PrintConsole(b => b ? "1" : ".");
+
+            // Example 3: enum pieces for a game
+            var pieceBoard = new Board<Piece>();
+            pieceBoard.Fill(Piece.None);
+            pieceBoard[3, 3] = Piece.Black;
+            pieceBoard[4, 4] = Piece.White;
+            Console.WriteLine("\nPiece board:");
+            pieceBoard.PrintConsole(p => p switch
             {
-                Console.WriteLine(message);
-            };
-
-            // 4. Run the game
-            await game.RunGame();
+                Piece.None => ".",
+                Piece.Black => "B",
+                Piece.White => "W",
+                _ => "?"
+            });
         }
+    }
 
-        // This is our "View" method
-        private static void PrintBoard(Board board)
-        {
-            Console.Clear();
-            Console.WriteLine("  0 1 2 3 4 5 6 7"); // Header
-            var sb = new StringBuilder();
-            for (int r = 0; r < 8; r++)
-            {
-                sb.Append(r); // Row number
-                for (int c = 0; c < 8; c++)
-                {
-                    sb.Append(' ');
-                    var color = board.GetCell(r, c).Color;
-                    switch (color)
-                    {
-                        case DiscColor.None:
-                            sb.Append('.'); // Empty
-                            break;
-                        case DiscColor.Black:
-                            sb.Append('B'); // Black
-                            break;
-                        case DiscColor.White:
-                            sb.Append('W'); // White
-                            break;
-                    }
-                }
-                sb.AppendLine();
-            }
-            Console.WriteLine(sb.ToString());
-        }
+    enum Piece
+    {
+        None,
+        White,
+        Black
     }
 }

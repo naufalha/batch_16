@@ -1,0 +1,87 @@
+
+classDiagram
+    direction TB
+
+    class Game {
+        -Board _board
+        -IPlayer _player1
+        -IPlayer _player2
+        -IPlayer _currentPlayer
+        -IMoveValidator _validator
+        +event Action~Board~ OnBoardUpdated
+        +RunGame()
+        -MakeMove(int row, int col)
+        -SwitchTurn()
+        -IsGameOver() bool
+    }
+
+    class Board {
+        -Cell[8,8] _cells
+        +Board()
+        +Initialize()
+        +GetCell(int r, int c) Cell
+        +SetCell(int r, int c, DiscColor color)
+        +GetValidMoves(DiscColor player, IMoveValidator validator) List~Move~
+    }
+
+    class Cell {
+        +DiscColor Color
+    }
+
+    class Move {
+        +int Row
+        +int Column
+        +List~Cell~ FlippableCells
+    }
+
+    class IMoveValidator {
+        <<interface>>
+        +List~Cell~ GetFlippableCells(Board board, int r, int c, DiscColor player)
+    }
+
+    class StandardOthelloValidator {
+        +List~Cell~ GetFlippableCells(Board board, int r, int c, DiscColor player)
+    }
+
+    class IPlayer {
+        <<interface>>
+        +DiscColor Color
+        +Task~Move~ GetMoveAsync(Board board)
+    }
+// [MermaidChart: 3417d603-ba04-4ed8-a4c6-b69ed416dff4]
+// [MermaidChart: 5379dfe0-2b4e-4240-83e7-03935e0e72f1]
+// [MermaidChart: 3417d603-ba04-4ed8-a4c6-b69ed416dff4]
+// [MermaidChart: 3417d603-ba04-4ed8-a4c6-b69ed416dff4]
+
+    class HumanPlayer {
+        +DiscColor Color
+        +Task~Move~ GetMoveAsync(Board board)
+    }
+
+    class AIPlayer {
+        <<Future-Proofing>>
+        +DiscColor Color
+        +Task~Move~ GetMoveAsync(Board board)
+    }
+
+    enum DiscColor {
+        None
+        Black
+        White
+    }
+
+    Game o-- "1" Board
+    Game o-- "2" IPlayer
+    Game o-- "1" IMoveValidator
+    Game ..> Move : uses
+    
+    Board *-- "64" Cell
+    Board ..> DiscColor : uses
+    Board ..> IMoveValidator : uses
+    
+    Cell *-- "1" DiscColor
+
+    HumanPlayer --|> IPlayer
+    AIPlayer --|> IPlayer
+    
+    StandardOthelloValidator --|> IMoveValidator

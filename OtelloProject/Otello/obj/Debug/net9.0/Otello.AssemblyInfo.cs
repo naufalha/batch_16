@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Otello")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ded0c752559e60ed0235a5ef262cd31e3f778bd9")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b80d678a16b9e10cbf36bd4f1816e2cb8c1a2629")]
 [assembly: System.Reflection.AssemblyProductAttribute("Otello")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Otello")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
