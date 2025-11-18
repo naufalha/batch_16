@@ -1,0 +1,31 @@
+flowchart TD
+
+A[Start Game] --> B[Initialize Board with starting discs]
+B --> C[Set CurrentPlayer = Black]
+
+C --> D[Render Board]
+D --> E[Check Available Moves for CurrentPlayer]
+
+E -->|No Moves| F[Switch Turn]
+F --> G[Check Available Moves for Next Player]
+G -->|No Moves for both players| Z[Game Over]
+
+E -->|Moves Available| H[Human Input (row, col)]
+
+H --> I[Validate Move]
+I -->|Invalid| D2[Show Error & Ask Again]
+D2 --> H
+
+I -->|Valid| J[Place Disc on Board]
+J --> K[Flip Opponent Discs]
+
+K --> L[Update Score on Board]
+L --> M[Trigger: OnBoardUpdated Action]
+M --> N[Trigger: OnTurnChanged Action]
+
+N --> O[Switch Player]
+O --> C
+
+Z --> X[Calculate Final Score]
+X --> Y[Trigger: OnGameOver Action]
+Y --> END[End]
