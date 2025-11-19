@@ -1,7 +1,7 @@
 classDiagram
     direction TB
 
-    %% ===== ENUM =====
+    %% ===== ENUMS & STRUCTS =====
     class DiscColor {
         <<enumeration>>
         None
@@ -9,76 +9,75 @@ classDiagram
         White
     }
 
-    %% ===== GAME =====
-    class Game {
-        -IBoard _board
-        -Dictionary~DiscColor, IPlayer~ _players
-        -DiscColor _currentTurn
-        +event Action<Board> OnBoardUpdated
-        +event Action<DiscColor> OnTurnChanged
-        +event Action<GameState> OnGameOver
-        +Game(Dictionary<DiscColor, IPlayer> players, IBoard board)
-        +Start()
-        +PlayMove(int row, int col)
-        -FlipCapturedDiscs(int row, int col)
-        -GetValidMoves() List~Coordinate~
-        -SwitchTurn()
-        -IsGameOver() bool
-        
-    }
-
-    %% ===== PLAYER =====
-    class IPlayer {
-        <<interface>>
-        +string Name
-        +Coordinate GetMove()
-    }
-
-    class HumanPlayer {
-        +string Name
-        +HumanPlayer(string name)
-        +Coordinate GetMove()
-    }
-
-    IPlayer <|.. HumanPlayer
-
-    %% ===== BOARD =====
-    class IBoard {
-        <<interface>>
-        +int GetScore(DiscColor color)
-        +Disc GetCell(int row, int col)
-        +bool IsInside(int row, int col)
-        +PlaceDisc(Disc disc)
-        +Initialize()
-    }
-
-    class Board {
-        -Disc[8][8] _grid
-        +Initialize()
-        +GetScore(DiscColor color) int
-        +GetCell(int row, int col) Disc
-        +IsInside(int row, int col) bool
-        +PlaceDisc(Disc disc)
-    }
-
-    IBoard <|.. Board
-
-    %% ===== DISC =====
-    class Disc {
-        +DiscColor Color
-        +Coordinate Position
-        +Flip()
-    }
-
-    %% ===== COORDINATE STRUCT =====
     class Coordinate {
         <<struct>>
         +int Row
         +int Col
     }
 
-    Game --> IBoard
-    Game --> IPlayer
-    Board --> Disc
-    Disc --> DiscColor
-    Disc --> Coordinate
+    %% ===== DISC (Object) =====
+    class Disc {
+        +DiscColor Color
+        +Coordinate Position
+        +Disc(DiscColor color, Coordinate pos)
+    }
+
+    %% ===== PLAYER (Data Entity) =====
+    class Player {
+        +string Name
+        +DiscColor Color
+        +Player(string name, DiscColor color)
+    }
+
+    %% ===== BOARD (Grid Manager) =====
+    class IBoard {
+        <<interface>>
+        +Disc GetCell(int row, int col)
+        +bool IsInside(int row, int col)
+        +PlaceDisc(int row, int col, DiscColor color)
+        +FlipDisc(int row, int col)
+        +Initialize()
+    }
+
+    class Board {
+        -Disc[8][8] _grid
+        +Initialize()
+        +GetCell(r, c) Disc
+        +PlaceDisc(r, c, color)
+        +FlipDisc(r, c)
+    }
+
+    IBoard <|.. Board
+    Board *-- Disc : Contains
+
+    %% ===== GAME (Logic Core) =====
+class Game {
+        -IBoard _board
+        -Dictionary~DiscColor, Player~ _players
+        -DiscColor _currentTurn
+        -int _blackScore
+        -int _whiteScore
+
+        +event Action~IBoard~ OnBoardUpdated
+        +event Action~Player~ OnTurnChanged
+        +event Action~Score~ OnScoreUpdated
+        +event Action~string~ OnInvalidMove
+        +event Action~DiscColor~ OnGameOver
+        
+        +Game(players, board)
+        +Start()
+        +PlayMove(int row, int col)
+        
+        %% NEW OPTIMIZATION METHODS
+        +GetValidMoves() List~Coordinate~
+        +Restart()
+        
+        +GetScore() Score
+        -SwitchTurn()
+        +ResetGame()
+    }
+
+    %% ===== RELATIONSHIPS =====
+    Game --> IBoard : Controls
+    Game --> Player : Maps via Dictionary
+    Game ..> Disc : Creates

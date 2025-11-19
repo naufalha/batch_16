@@ -1,31 +1,46 @@
 flowchart TD
 
-A[Start Game] --> B[Initialize Board with starting discs]
-B --> C[Set CurrentPlayer = Black]
+    %% Setup
+    A[Game.Start<br/>Method] --> B[ _board.Initialize<br/>Method ]
+    B --> C[ _currentTurn = DiscColor.Black<br/>Property Set ]
 
-C --> D[Render Board]
-D --> E[Check Available Moves for CurrentPlayer]
+    %% Turn Logic
+    C --> D[Game.GetValidMoves<br/>Returns List Coordinate]
+    
+    %% No Moves Logic (Pass Turn)
+    D -->|Count == 0| F[Game.SwitchTurn<br/>Method]
+    F --> G[Game.GetValidMoves<br/>Check Next Player]
+    G -->|Count == 0| Z[Game.IsGameOver<br/>Returns True]
 
-E -->|No Moves| F[Switch Turn]
-F --> G[Check Available Moves for Next Player]
-G -->|No Moves for both players| Z[Game Over]
+    %% Human Input Logic
+    D -->|Count > 0| H[HumanPlayer.GetMove<br/>Returns Coordinate]
+    
+    %% Validation Loop
+    H --> I{IsValid Move?}
+    I -->|No| D2["Show Error (UI)"]
+    D2 --> H
 
-E -->|Moves Available| H[Human Input (row, col)]
+    %% Execution Logic
+    I -->|Yes| J[Game.PlayMove<br/>Method]
+    
+    J --> K[ _board.PlaceDisc<br/>Method ]
+    K --> L[Game.FlipCapturedDiscs<br/>Calls Disc.Flip]
 
-H --> I[Validate Move]
-I -->|Invalid| D2[Show Error & Ask Again]
-D2 --> H
+    %% Events and State Updates
+    L --> M[Event: OnBoardUpdated<br/>Invoke]
+    M --> N[Game.SwitchTurn<br/>Method]
+    N --> O[Event: OnTurnChanged<br/>Invoke]
+    O --> C
 
-I -->|Valid| J[Place Disc on Board]
-J --> K[Flip Opponent Discs]
+    %% Game Over Logic
+    Z --> X[ _board.GetScore<br/>Method ]
+    X --> Y[Event: OnGameOver<br/>Invoke]
+    Y --> END((End))
 
-K --> L[Update Score on Board]
-L --> M[Trigger: OnBoardUpdated Action]
-M --> N[Trigger: OnTurnChanged Action]
-
-N --> O[Switch Player]
-O --> C
-
-Z --> X[Calculate Final Score]
-X --> Y[Trigger: OnGameOver Action]
-Y --> END[End]
+    %% Styling for readability
+    style A fill:#f9f,stroke:#333,stroke-width:2px
+    style H fill:#bbf,stroke:#333,stroke-width:2px
+    style J fill:#bfb,stroke:#333,stroke-width:2px
+    style M fill:#ff9,stroke:#333,stroke-width:2px
+    style O fill:#ff9,stroke:#333,stroke-width:2px
+    style Y fill:#ff9,stroke:#333,stroke-width:2px
