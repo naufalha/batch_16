@@ -32,6 +32,7 @@ public class Program
     {
         int batasAkhir = 105;
         var generator = new FoobarGenerator();
+        //api usage generator.Addrule(an integer number,some string)
         generator.AddRule(3, "foo");
         generator.AddRule(4, "baz");
         generator.AddRule(5, "bar");
@@ -41,7 +42,7 @@ public class Program
         //an example adding addtion rules
         generator.AddRule(10, "fufu");
         generator.AddRule(20,"fafa");
-        Console.WriteLine($"--- Combo Output Sampai Angka {batasAkhir} ---");
+        Console.WriteLine($"--- API Based foobar from 1 to {batasAkhir} ---");
         for (int x = 1; x <= batasAkhir; x++)
         {
             Console.WriteLine(generator.Generate(x));
