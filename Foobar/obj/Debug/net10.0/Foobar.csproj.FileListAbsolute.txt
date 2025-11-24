@@ -1,0 +1,15 @@
+C:\Users\Acer\batch_16\Foobar\bin\Debug\net10.0\Foobar.exe
+C:\Users\Acer\batch_16\Foobar\bin\Debug\net10.0\Foobar.deps.json
+C:\Users\Acer\batch_16\Foobar\bin\Debug\net10.0\Foobar.runtimeconfig.json
+C:\Users\Acer\batch_16\Foobar\bin\Debug\net10.0\Foobar.dll
+C:\Users\Acer\batch_16\Foobar\bin\Debug\net10.0\Foobar.pdb
+C:\Users\Acer\batch_16\Foobar\obj\Debug\net10.0\Foobar.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Acer\batch_16\Foobar\obj\Debug\net10.0\Foobar.AssemblyInfoInputs.cache
+C:\Users\Acer\batch_16\Foobar\obj\Debug\net10.0\Foobar.AssemblyInfo.cs
+C:\Users\Acer\batch_16\Foobar\obj\Debug\net10.0\Foobar.csproj.CoreCompileInputs.cache
+C:\Users\Acer\batch_16\Foobar\obj\Debug\net10.0\Foobar.sourcelink.json
+C:\Users\Acer\batch_16\Foobar\obj\Debug\net10.0\Foobar.dll
+C:\Users\Acer\batch_16\Foobar\obj\Debug\net10.0\refint\Foobar.dll
+C:\Users\Acer\batch_16\Foobar\obj\Debug\net10.0\Foobar.pdb
+C:\Users\Acer\batch_16\Foobar\obj\Debug\net10.0\Foobar.genruntimeconfig.cache
+C:\Users\Acer\batch_16\Foobar\obj\Debug\net10.0\ref\Foobar.dll

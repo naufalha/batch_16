@@ -1,59 +1,50 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
+
+public class FoobarGenerator
+{   
+    //
+    private readonly List<KeyValuePair<int, string>> _rules = new();
+    public void AddRule(int input, string output)
+    {
+        _rules.Add(new KeyValuePair<int, string>(input, output));
+    }
+    public string Generate(int number)
+    {
+        StringBuilder sb = new StringBuilder();
+
+        foreach (var rule in _rules)
+        {
+            if (number % rule.Key == 0)
+            {
+                sb.Append(rule.Value);
+            }
+        }
+
+        return sb.Length > 0 ? sb.ToString() : number.ToString();
+    }
+}
 
 public class Program
 {
     public static void Main(string[] args)
     {
         int batasAkhir = 105;
+        var generator = new FoobarGenerator();
+        generator.AddRule(3, "foo");
+        generator.AddRule(4, "baz");
+        generator.AddRule(5, "bar");
+        generator.AddRule(7, "jazz");
+        generator.AddRule(9, "huzz");
 
+        //an example adding addtion rules
+        generator.AddRule(10, "fufu");
+        generator.AddRule(20,"fafa");
         Console.WriteLine($"--- Combo Output Sampai Angka {batasAkhir} ---");
-
         for (int x = 1; x <= batasAkhir; x++)
         {
-            StringBuilder sb = new StringBuilder();
-
-            // Switch-case appending each string to a setring builder object
-            switch (true)
-            {
-                case bool when x % 3 == 0:
-                    sb.Append("foo");
-                    break;
-            }
-
-            switch (true)
-            {
-                case bool when x % 4 == 0:
-                    sb.Append("baz");
-                    break;
-            }
-
-            switch (true)
-            {
-                case bool when x % 5 == 0:
-                    sb.Append("bar");
-                    break;
-            }
-
-            switch (true)
-            {
-                case bool when x % 7 == 0:
-                    sb.Append("jazz");
-                    break;
-            }
-
-            switch (true)
-            {
-                case bool when x % 9 == 0:
-                    sb.Append("huzz");
-                    break;
-            }
-
-            // Kalau gak ada aturan yang match → print angka
-            if (sb.Length == 0)
-                Console.WriteLine(x);
-            else
-                Console.WriteLine(sb.ToString());
+            Console.WriteLine(generator.Generate(x));
         }
     }
 }
