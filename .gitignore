@@ -1,0 +1,32 @@
+# Ignoring Visual Studio files
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Ignoring Visual Studio Code files
+.vscode/
+
+# Ignoring build results
+[Dd]ebug/
+[Rr]elease/
+[Bb]in/
+[Oo]bj/
+[Oo]ut/
+
+# Ignoring packages
+packages/
+*.nupkg
+.DS_Store
+
+# Ignoring miscellaneous files
+*.log
+*.bak
+*.ncb
+*.sdf
+*.opensdf
+*.docstates
+*.vssscc
+*.buildscc
+*.msscc
