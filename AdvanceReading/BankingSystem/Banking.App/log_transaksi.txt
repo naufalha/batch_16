@@ -1,0 +1,11 @@
+12/3/2025 10:19:17 AM: Penarikan berhasil: 200
+12/3/2025 10:19:17 AM: Penarikan berhasil: 50
+12/3/2025 10:19:30 AM: Penarikan berhasil: 200
+12/3/2025 10:19:30 AM: Penarikan berhasil: 50
+12/3/2025 10:19:33 AM: Penarikan berhasil: 200
+12/3/2025 10:19:33 AM: Penarikan berhasil: 50
+12/3/2025 10:19:37 AM: Penarikan berhasil: 200
+12/3/2025 10:19:37 AM: Penarikan berhasil: 50
+12/3/2025 10:24:11 AM: Penarikan berhasil: 500
+12/3/2025 10:24:11 AM: Penarikan berhasil: 200
+12/3/2025 10:24:11 AM: Penarikan berhasil: 300
