@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hard Mode: C# Architecture & Testing Quiz</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;600;800&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a;
+            color: #e2e8f0;
+        }
+        
+        .code-font {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Custom scrollbar for code blocks */
+        .custom-scrollbar::-webkit-scrollbar {
+            height: 8px;
+            width: 8px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #1e293b; 
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #475569; 
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #64748b; 
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        const questions = [
+            {
+                id: 1,
+                category: "Structured Logging",
+                question: "Which of the following log statements properly utilizes structured logging to ensure 'UserId' is searchable as a distinct property, avoiding the 'string interpolation trap'?",
+                code: `// Option A
+_logger.LogInformation($"User {userId} logged in at {DateTime.Now}");
+
+// Option B
+_logger.LogInformation("User {UserId} logged in at {Timestamp}", userId, DateTime.Now);
+
+// Option C
+_logger.LogInformation("User " + userId + " logged in at " + DateTime.Now);`,
+                options: [
+                    { id: 'A', text: "Option A" },
+                    { id: 'B', text: "Option B" },
+                    { id: 'C', text: "Option C" },
+                    { id: 'D', text: "All of the above are equivalent in Serilog." }
+                ],
+                correct: 'B',
+                explanation: "Option B uses named placeholders ({UserId}). Serilog captures these as structured properties. Option A uses C# string interpolation ($), which resolves the string *before* it reaches the logger, resulting in a plain text message with no separate properties."
+            },
+            {
+                id: 2,
+                category: "Moq & Unit Testing",
+                question: "You are creating a Partial Mock of a 'PaymentService' class. You want to mock the 'MakePayment' method but ensure all other methods in the class execute their original logic. Which Moq configuration is critical?",
+                code: `var mock = new Mock<PaymentService>();
+mock.Setup(x => x.MakePayment(It.IsAny<Card>())).Returns(true);
+// What line is missing here?`,
+                options: [
+                    { id: 'A', text: "mock.SetupAllProperties();" },
+                    { id: 'B', text: "mock.Verifiable();" },
+                    { id: 'C', text: "mock.CallBase = true;" },
+                    { id: 'D', text: "mock.As<IPaymentService>();" }
+                ],
+                correct: 'C',
+                explanation: "When mocking a concrete class (Partial Mock), `CallBase = true` is essential. Without it, un-setup virtual methods will return default values (null/0/false) instead of executing the base class implementation."
+            },
+            {
+                id: 3,
+                category: "SOLID Principles",
+                question: "Review the code below. Which specific SOLID principle is primarily violated by the 'Penguin' class?",
+                code: `public class Bird {
+    public virtual void Fly() { /* Implementation */ }
+}
+
+public class Penguin : Bird {
+    public override void Fly() {
+        throw new NotImplementedException("Penguins cannot fly!");
+    }
+}`,
+                options: [
+                    { id: 'A', text: "Single Responsibility Principle (SRP)" },
+                    { id: 'B', text: "Open/Closed Principle (OCP)" },
+                    { id: 'C', text: "Liskov Substitution Principle (LSP)" },
+                    { id: 'D', text: "Dependency Inversion Principle (DIP)" }
+                ],
+                correct: 'C',
+                explanation: "LSP states that subtypes must be substitutable for their base types. If code expects a `Bird` and calls `Fly()`, passing a `Penguin` causes a runtime exception, breaking the contract."
+            },
+            {
+                id: 4,
+                category: "Tell, Don't Ask",
+                question: "Which refactoring best applies the 'Tell, Don't Ask' principle to this snippet?",
+                code: `// Current Approach (Ask)
+if (monitor.GetValue() > monitor.GetLimit()) {
+    alarm.Warn(monitor.GetName() + " is too high");
+}`,
+                options: [
+                    { id: 'A', text: "Move the logic into a new 'MonitorService' class." },
+                    { id: 'B', text: "Create a setter: monitor.SetAlarm(alarm). The client just calls monitor.SetValue(3) and the monitor triggers the alarm internally." },
+                    { id: 'C', text: "Keep the check, but make the properties public to avoid Getters." },
+                    { id: 'D', text: "Change the check to: if (monitor.IsTooHigh(monitor.GetLimit()))" }
+                ],
+                correct: 'B',
+                explanation: "Tell, Don't Ask means encapsulating logic with data. Instead of extracting data to decide externally, you 'tell' the object to update its value, and it decides internally if an alarm is needed."
+            },
+            {
+                id: 5,
+                category: "Serilog Configuration",
+                question: "In the context of Serilog Sinks, what does the `rollingInterval: RollingInterval.Day` parameter specifically achieve in a File Sink configuration?",
+                code: `.WriteTo.File("logs/myapp.log", rollingInterval: RollingInterval.Day)`,
+                options: [
+                    { id: 'A', text: "It overwrites the 'myapp.log' file every 24 hours." },
+                    { id: 'B', text: "It creates a new file daily (e.g., myapp20231025.log) and preserves history." },
+                    { id: 'C', text: "It deletes log files older than one day." },
+                    { id: 'D', text: "It zips the log file at midnight." }
+                ],
+                correct: 'B',
+                explanation: "RollingInterval.Day tells the File Sink to create a new file for every day period, appending the date to the filename, thus preserving a history of logs separated by date."
+            },
+            {
+                id: 6,
+                category: "Unit Testing (NUnit)",
+                question: "In NUnit, you have a method decorated with `[SetUp]`. When exactly is this method executed?",
+                code: `[SetUp]
+public void Init() { 
+    _service = new Service(); 
+}`,
+                options: [
+                    { id: 'A', text: "Once before the entire TestFixture class is instantiated." },
+                    { id: 'B', text: "Once after all tests in the class have finished." },
+                    { id: 'C', text: "Immediately before each individual [Test] method is run." },
+                    { id: 'D', text: "Only when the constructor of the Test class is called." }
+                ],
+                correct: 'C',
+                explanation: "The `[SetUp]` attribute in NUnit marks a method to be run before *each* test method in the fixture, ensuring a clean state for every test."
+            },
+            {
+                id: 7,
+                category: "KISS Principle",
+                question: "The provided text suggests refactoring a complex method with multiple `if` flags (like `applyDiscount`, `isTaxable`) to adhere to KISS. What was the suggested approach?",
+                code: `public int Calculate(bool discount, bool tax) {
+   // complex mixed logic
+}`,
+                options: [
+                    { id: 'A', text: "Combine all logic into a single ternary operator line." },
+                    { id: 'B', text: "Segregate concerns into smaller, focused methods like ApplyDiscount() and ApplyTax()." },
+                    { id: 'C', text: "Create an abstract strategy class for every boolean flag." },
+                    { id: 'D', text: "Use a rules engine database." }
+                ],
+                correct: 'B',
+                explanation: "The text argues that breaking the logic into smaller, specifically named methods (ApplyDiscount, ApplyTax) reduces complexity and makes the code more readable and maintainable, adhering to Keep It Simple Stupid."
+            },
+            {
+                id: 8,
+                category: "Serilog Enrichment",
+                question: "You want to attach a 'TransactionId' to every log generated within a specific block of code (like processing an order). Which Serilog feature is best suited for this?",
+                code: `// Which construct wraps this block?
+{
+    Log.Information("Step 1");
+    Log.Information("Step 2");
+}`,
+                options: [
+                    { id: 'A', text: "Log.ForContext(\"TransactionId\", id)" },
+                    { id: 'B', text: "LogContext.PushProperty(\"TransactionId\", id)" },
+                    { id: 'C', text: "Log.WithProperty(\"TransactionId\", id)" },
+                    { id: 'D', text: "LoggerConfiguration.Enrich.WithProperty()" }
+                ],
+                correct: 'B',
+                explanation: "LogContext.PushProperty is used within a `using` block to push a property onto the context stack. All logs written inside that block will automatically carry that property."
+            }
+        ];
+
+        function App() {
+            const [currentQuestion, setCurrentQuestion] = useState(0);
+            const [score, setScore] = useState(0);
+            const [showScore, setShowScore] = useState(false);
+            const [selectedOption, setSelectedOption] = useState(null);
+            const [isAnswered, setIsAnswered] = useState(false);
+            const [answers, setAnswers] = useState([]); // Track user answers for review
+
+            const handleAnswerOptionClick = (optionId) => {
+                if (isAnswered) return;
+                
+                const isCorrect = optionId === questions[currentQuestion].correct;
+                setSelectedOption(optionId);
+                setIsAnswered(true);
+                
+                if (isCorrect) {
+                    setScore(score + 1);
+                }
+
+                setAnswers([...answers, {
+                    questionId: questions[currentQuestion].id,
+                    userAnswer: optionId,
+                    isCorrect: isCorrect
+                }]);
+            };
+
+            const handleNextQuestion = () => {
+                const nextQuestion = currentQuestion + 1;
+                if (nextQuestion < questions.length) {
+                    setCurrentQuestion(nextQuestion);
+                    setIsAnswered(false);
+                    setSelectedOption(null);
+                } else {
+                    setShowScore(true);
+                }
+            };
+
+            const restartQuiz = () => {
+                setScore(0);
+                setCurrentQuestion(0);
+                setShowScore(false);
+                setIsAnswered(false);
+                setSelectedOption(null);
+                setAnswers([]);
+            };
+
+            const getProgress = () => {
+                return ((currentQuestion + 1) / questions.length) * 100;
+            };
+
+            return (
+                <div className="min-h-screen flex items-center justify-center p-4">
+                    <div className="w-full max-w-3xl bg-slate-900 rounded-2xl shadow-2xl overflow-hidden border border-slate-700">
+                        {showScore ? (
+                            <div className="p-8 fade-in">
+                                <div className="text-center mb-8">
+                                    <h2 className="text-3xl font-bold mb-4 text-white">Quiz Completed</h2>
+                                    <div className="text-6xl font-black text-indigo-400 mb-2">{score} / {questions.length}</div>
+                                    <p className="text-slate-400">
+                                        {score === questions.length ? "Perfect Score! You're a Software Architect." : 
+                                         score > questions.length / 2 ? "Good job! You know your principles." : 
+                                         "Keep studying those docs!"}
+                                    </p>
+                                </div>
+                                
+                                <div className="space-y-6">
+                                    <h3 className="text-xl font-bold text-white border-b border-slate-700 pb-2">Review</h3>
+                                    {questions.map((q, index) => {
+                                        const answer = answers.find(a => a.questionId === q.id);
+                                        const isCorrect = answer?.isCorrect;
+                                        return (
+                                            <div key={q.id} className={`p-4 rounded-lg border ${isCorrect ? 'border-green-900 bg-green-900/10' : 'border-red-900 bg-red-900/10'}`}>
+                                                <div className="flex justify-between items-start mb-2">
+                                                    <span className="text-sm font-mono text-slate-500">Q{index + 1}</span>
+                                                    <span className={`text-xs px-2 py-1 rounded font-bold ${isCorrect ? 'bg-green-900 text-green-300' : 'bg-red-900 text-red-300'}`}>
+                                                        {isCorrect ? 'CORRECT' : 'INCORRECT'}
+                                                    </span>
+                                                </div>
+                                                <p className="text-white font-medium mb-2">{q.question}</p>
+                                                <div className="text-sm text-slate-300 bg-slate-800 p-3 rounded mb-2">
+                                                    <span className="font-bold text-slate-400">Correct Answer: </span>
+                                                    {q.options.find(o => o.id === q.correct).text}
+                                                </div>
+                                                <p className="text-sm text-slate-400 italic border-l-2 border-slate-600 pl-3">
+                                                    {q.explanation}
+                                                </p>
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+
+                                <button 
+                                    onClick={restartQuiz}
+                                    className="mt-8 w-full py-4 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-lg transition-colors duration-200"
+                                >
+                                    Try Again
+                                </button>
+                            </div>
+                        ) : (
+                            <div className="fade-in">
+                                {/* Header / Progress */}
+                                <div className="bg-slate-800 p-6 border-b border-slate-700">
+                                    <div className="flex justify-between items-center mb-4">
+                                        <span className="text-xs font-bold tracking-wider text-indigo-400 uppercase">
+                                            {questions[currentQuestion].category}
+                                        </span>
+                                        <span className="text-slate-400 text-sm font-mono">
+                                            {currentQuestion + 1}/{questions.length}
+                                        </span>
+                                    </div>
+                                    <div className="w-full bg-slate-700 rounded-full h-2">
+                                        <div 
+                                            className="bg-indigo-500 h-2 rounded-full transition-all duration-500 ease-out"
+                                            style={{ width: `${getProgress()}%` }}
+                                        ></div>
+                                    </div>
+                                </div>
+
+                                {/* Question Content */}
+                                <div className="p-6 md:p-8">
+                                    <h2 className="text-xl font-bold text-white mb-6 leading-relaxed">
+                                        {questions[currentQuestion].question}
+                                    </h2>
+
+                                    {questions[currentQuestion].code && (
+                                        <div className="mb-6 bg-slate-950 rounded-lg p-4 overflow-x-auto custom-scrollbar border border-slate-800">
+                                            <pre className="text-sm code-font text-blue-300">
+                                                {questions[currentQuestion].code}
+                                            </pre>
+                                        </div>
+                                    )}
+
+                                    <div className="space-y-3">
+                                        {questions[currentQuestion].options.map((option) => {
+                                            let buttonClass = "w-full text-left p-4 rounded-lg border-2 transition-all duration-200 font-medium ";
+                                            
+                                            if (isAnswered) {
+                                                if (option.id === questions[currentQuestion].correct) {
+                                                    buttonClass += "border-green-500 bg-green-900/20 text-green-300";
+                                                } else if (option.id === selectedOption) {
+                                                    buttonClass += "border-red-500 bg-red-900/20 text-red-300";
+                                                } else {
+                                                    buttonClass += "border-slate-700 text-slate-500 opacity-50";
+                                                }
+                                            } else {
+                                                buttonClass += "border-slate-700 hover:border-indigo-500 hover:bg-slate-800 text-slate-300";
+                                            }
+
+                                            return (
+                                                <button
+                                                    key={option.id}
+                                                    onClick={() => handleAnswerOptionClick(option.id)}
+                                                    disabled={isAnswered}
+                                                    className={buttonClass}
+                                                >
+                                                    <span className="inline-block w-6 font-mono text-slate-500 mr-2">{option.id}.</span>
+                                                    {option.text}
+                                                </button>
+                                            );
+                                        })}
+                                    </div>
+                                </div>
+
+                                {/* Footer / Feedback */}
+                                <div className="p-6 border-t border-slate-700 bg-slate-800/50 min-h-[100px] flex items-center justify-between">
+                                    {isAnswered ? (
+                                        <>
+                                            <div className="flex-1 mr-4">
+                                                <p className={`font-bold mb-1 ${selectedOption === questions[currentQuestion].correct ? 'text-green-400' : 'text-red-400'}`}>
+                                                    {selectedOption === questions[currentQuestion].correct ? 'Correct!' : 'Incorrect'}
+                                                </p>
+                                                <p className="text-sm text-slate-400 leading-snug">
+                                                    {questions[currentQuestion].explanation}
+                                                </p>
+                                            </div>
+                                            <button 
+                                                onClick={handleNextQuestion}
+                                                className="px-6 py-2 bg-white text-slate-900 font-bold rounded hover:bg-indigo-50 transition-colors"
+                                            >
+                                                {currentQuestion === questions.length - 1 ? "Finish" : "Next"}
+                                            </button>
+                                        </>
+                                    ) : (
+                                        <p className="text-slate-500 text-sm italic">Select an option to continue...</p>
+                                    )}
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                </div>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>

@@ -13,9 +13,10 @@ class Program
         
         //create adapter logger
         Banking.Domain.ILogger loggerAsli = new SerilogAdapter();
+        IFraudService fraudService = new FakeFraudService();
 
         //depedency injection
-        var MilosAccount = new BankAccount(1000m, loggerAsli);
+        var MilosAccount = new BankAccount(1000m, loggerAsli, fraudService);
         Console.WriteLine($"Saldo awal: {MilosAccount.Balance}");
 
 
@@ -25,7 +26,7 @@ class Program
         //ILogger loggerAsli = new FileLogger(lokasiFile);
         //3.buat akun bank
         //bank akun tidak peduli asli atau palsu)
-        var myAccount = new BankAccount(1000m, loggerAsli);
+        var myAccount = new BankAccount(1000m, loggerAsli,fraudService);
         Console.WriteLine($"Saldo awal: {myAccount.Balance}");
         myAccount.Withdraw(500m);
         Console.WriteLine($"Saldo akhir: {myAccount.Balance}");

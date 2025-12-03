@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Banking.Domain", "Banking.D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Banking.Tests", "Banking.Tests\Banking.Tests.csproj", "{9C38433B-7790-476F-A828-3C63F8F036C4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Banking.App", "Banking.App\Banking.App.csproj", "{2D8D1D9A-C67C-44E5-8CDE-E63008FC972A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,18 @@ Global
 		{9C38433B-7790-476F-A828-3C63F8F036C4}.Release|x64.Build.0 = Release|Any CPU
 		{9C38433B-7790-476F-A828-3C63F8F036C4}.Release|x86.ActiveCfg = Release|Any CPU
 		{9C38433B-7790-476F-A828-3C63F8F036C4}.Release|x86.Build.0 = Release|Any CPU
+		{2D8D1D9A-C67C-44E5-8CDE-E63008FC972A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D8D1D9A-C67C-44E5-8CDE-E63008FC972A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D8D1D9A-C67C-44E5-8CDE-E63008FC972A}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{2D8D1D9A-C67C-44E5-8CDE-E63008FC972A}.Debug|x64.Build.0 = Debug|Any CPU
+		{2D8D1D9A-C67C-44E5-8CDE-E63008FC972A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{2D8D1D9A-C67C-44E5-8CDE-E63008FC972A}.Debug|x86.Build.0 = Debug|Any CPU
+		{2D8D1D9A-C67C-44E5-8CDE-E63008FC972A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D8D1D9A-C67C-44E5-8CDE-E63008FC972A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D8D1D9A-C67C-44E5-8CDE-E63008FC972A}.Release|x64.ActiveCfg = Release|Any CPU
+		{2D8D1D9A-C67C-44E5-8CDE-E63008FC972A}.Release|x64.Build.0 = Release|Any CPU
+		{2D8D1D9A-C67C-44E5-8CDE-E63008FC972A}.Release|x86.ActiveCfg = Release|Any CPU
+		{2D8D1D9A-C67C-44E5-8CDE-E63008FC972A}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
