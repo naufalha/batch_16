@@ -1,4 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using EmployeeApi.Models;
+
 
 namespace EmployeeApi.Models
 {
@@ -11,5 +13,6 @@ namespace EmployeeApi.Models
 
         // This DbSet represents the "Employees" table in your SQLite database
         public DbSet<Employee> Employees { get; set; }
+        public DbSet<Department> Departments {get; set;}
     }
 }

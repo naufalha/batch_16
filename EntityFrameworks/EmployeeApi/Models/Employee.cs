@@ -1,3 +1,4 @@
+
 namespace EmployeeApi.Models
 {
     public class Employee
@@ -7,5 +8,11 @@ namespace EmployeeApi.Models
         public string LastName { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
         public string Department { get; set; } = string.Empty;
+        public string Salary { get; set; }  = string.Empty;
+        public int Age { get; set; } = 0;  
+
+        //foregin key linked to departement table
+        public int DepartmentId { get; set; } = 0;
+        public Department Departments { get; set; } = null;
     }
 }

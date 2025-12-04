@@ -2,6 +2,7 @@
 using EmployeeApi.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -9,14 +10,16 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EmployeeApi.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251204064826_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.7");
 
-            modelBuilder.Entity("EmployeeApi.Models.Department", b =>
+            modelBuilder.Entity("EmployeeApi.Models.Departement", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -28,7 +31,7 @@ namespace EmployeeApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Departments");
+                    b.ToTable("Departement");
                 });
 
             modelBuilder.Entity("EmployeeApi.Models.Employee", b =>
@@ -40,12 +43,12 @@ namespace EmployeeApi.Migrations
                     b.Property<int>("Age")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("DepartementId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Department")
                         .IsRequired()
                         .HasColumnType("TEXT");
-
-                    b.Property<int>("DepartmentId")
-                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -65,23 +68,23 @@ namespace EmployeeApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DepartmentId");
+                    b.HasIndex("DepartementId");
 
                     b.ToTable("Employees");
                 });
 
             modelBuilder.Entity("EmployeeApi.Models.Employee", b =>
                 {
-                    b.HasOne("EmployeeApi.Models.Department", "Departments")
+                    b.HasOne("EmployeeApi.Models.Departement", "Departement")
                         .WithMany("Employees")
-                        .HasForeignKey("DepartmentId")
+                        .HasForeignKey("DepartementId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Departments");
+                    b.Navigation("Departement");
                 });
 
-            modelBuilder.Entity("EmployeeApi.Models.Department", b =>
+            modelBuilder.Entity("EmployeeApi.Models.Departement", b =>
                 {
                     b.Navigation("Employees");
                 });
