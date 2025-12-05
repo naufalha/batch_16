@@ -1,31 +1,49 @@
-using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using SMK_Ngawi_Selatan_ProjectMVC.Models;
+using SmkNgawi.DTOs;
+using SmkNgawi.Services;
 
-namespace SMK_Ngawi_Selatan_ProjectMVC.Controllers;
-
-public class HomeController : Controller
+namespace SmkNgawi.Controllers
 {
-    private readonly ILogger<HomeController> _logger;
-
-    public HomeController(ILogger<HomeController> logger)
+    public class StudentController : Controller
     {
-        _logger = logger;
-    }
+        private readonly RegistrationService _service;
 
-    public IActionResult Index()
-    {
-        return View();
-    }
+        // Constructor Injection
+        // ASP.NET otomatis memasukkan service yang sudah didaftarkan di Program.cs
+        public StudentController(RegistrationService service)
+        {
+            _service = service;
+        }
 
-    public IActionResult Privacy()
-    {
-        return View();
-    }
+        // GET: /Student
+        public IActionResult Index()
+        {
+            // Pastikan database ada isinya (Shortcut untuk tutorial)
+            _service.SeedData(); 
 
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
-    {
-        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            // Ambil data dari Service
+            var data = _service.GetAllStudents(); // <-- Anda perlu update Service agar me-return List, bukan void print console
+            
+            // Kirim data ke View (Layar)
+            return View(data);
+        }
+
+        // GET: /Student/Create (Menampilkan Form)
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        // POST: /Student/Create (Menerima Input Form)
+        [HttpPost]
+        public IActionResult Create(StudentRegistrationRequest request)
+        {
+            if (ModelState.IsValid)
+            {
+                _service.RegisterNewStudent(request);
+                return RedirectToAction("Index"); // Kembali ke list
+            }
+            return View(request); // Jika error, tampilkan form lagi
+        }
     }
 }

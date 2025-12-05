@@ -12,13 +12,11 @@ namespace SmkNgawi.Services
     public class RegistrationService
     {
         private AppDbContext _context;
-        public RegistrationService()
+public RegistrationService(AppDbContext context)
         {
-            _context = new AppDbContext();
-
-
-            //membuat database tanpa migration
-            _context.Database.EnsureCreated();
+            // PERBAIKAN UTAMA ANDA DISINI:
+            // Kita harus mengisi variable _context dengan kiriman dari luar.
+            _context = context; 
         }
 
         //seeding initial data
@@ -49,7 +47,7 @@ namespace SmkNgawi.Services
             }
         }
 
-
+        
         //fitur penaftaran siswa pakai dto request 
         public void RegisterNewStudent(StudentRegistrationRequest request)
         {
@@ -67,6 +65,16 @@ namespace SmkNgawi.Services
 
             
         }
+
+        // fitur get all student data dengan merturn list
+
+        public List<Student> GetAllStudents()
+        {
+            return _context.Students.ToList();
+        }
+
+
+
         //fitur show student dengan dto responses
         public void ShowAllStudents()
         {

@@ -9,8 +9,8 @@ namespace SmkNgawi.Entities
         [Key]
         public int Id { get; set; }
 
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
+        public string? FirstName { get; set; }
+        public string? LastName { get; set; }
         public DateTime RegistrationDate { get; set; }
 
         // Foreign Key ke ClassRoom
@@ -18,6 +18,6 @@ namespace SmkNgawi.Entities
         public int ClassRoomId { get; set; }
         
         [ForeignKey("ClassRoomId")]
-        public ClassRoom ClassRoom { get; set; }
+        public ClassRoom? ClassRoom { get; set; }
     }
 }

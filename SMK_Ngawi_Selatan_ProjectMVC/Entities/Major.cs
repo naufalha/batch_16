@@ -9,12 +9,12 @@ namespace SmkNgawi.Entities
         public int Id{ get; set;}
 
         [Required]
-        public string MajorName{get ; set;}
-        public string Code{get; set;}
+        public string? MajorName{get ; set;}
+        public string? Code{get; set;}
 
 
         //relation
-        public List<ClassRoom> ClassRooms{get; set;}
+        public List<ClassRoom>? ClassRooms{get; set;}
     
     }
 }

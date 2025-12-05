@@ -9,7 +9,7 @@ namespace SmkNgawi.Entities
         [Key]
         public int Id{get; set;}
         
-        public string ClassName{get ; set ;}
+        public string? ClassName{get ; set ;}
 
         //foreign key ke major
         public int MajorId{get; set;}
@@ -17,10 +17,10 @@ namespace SmkNgawi.Entities
 
 
         //relation
-        public Major Major{get; set;}
+        public Major? Major{get; set;}
 
         //relasi satu kelas ke banyak siswa
-        public List<Student> Students{get; set;}
+        public List<Student>? Students{get; set;}
 
     }
 }
