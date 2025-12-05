@@ -1,0 +1,44 @@
+@model SmkNgawi.DTOs.CreateClassRequest
+
+<div class="container mt-4">
+    <h2>Tambah Kelas Baru</h2>
+    <hr />
+
+    <div class="row">
+        <div class="col-md-6">
+            <form asp-action="AddClass" method="post">
+                
+                <div asp-validation-summary="All" class="text-danger"></div>
+
+                <div class="mb-3">
+                    <label class="form-label">Nama Kelas</label>
+                    <input asp-for="ClassName" class="form-control" placeholder="Contoh: X-RPL-1" />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Tingkat Kelas (Grade)</label>
+                    <input asp-for="GradeLevel" type="number" class="form-control" placeholder="10, 11, atau 12" />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Pilih Jurusan</label>
+                    <select asp-for="MajorId" class="form-control">
+                        <option value="">-- Pilih Jurusan --</option>
+                        
+                        @* Kita meloop data yang dikirim lewat ViewBag *@
+                        @if (ViewBag.Majors != null)
+                        {
+                            foreach (var major in ViewBag.Majors)
+                            {
+                                <option value="@major.Id">@major.Name</option>
+                            }
+                        }
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Simpan Kelas</button>
+                <a href="/Student" class="btn btn-secondary">Kembali</a>
+            </form>
+        </div>
+    </div>
+</div>

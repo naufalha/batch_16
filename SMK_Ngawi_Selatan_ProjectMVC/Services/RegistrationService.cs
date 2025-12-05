@@ -58,6 +58,8 @@ public RegistrationService(AppDbContext context)
                 ClassRoomId = request.TargetClassRoomId,
                 RegistrationDate = DateTime.Now
                 
+                 
+                
             };
             _context.Students.Add(newStudent);
             _context.SaveChanges();
@@ -86,6 +88,10 @@ public RegistrationService(AppDbContext context)
         MajorName = s.ClassRoom?.Major?.MajorName ?? "-",
         RegistrationDate = s.RegistrationDate
     }).ToList();
+
+
+    //get the major name
+    
 
     // 3. Kembalikan list DTO
     return dtoList;

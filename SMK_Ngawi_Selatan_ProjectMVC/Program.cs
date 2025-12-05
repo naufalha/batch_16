@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using SmkNgawi.Data;
 using SmkNgawi.Services;
+using SmkNgawiWeb.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 // A. Daftarkan fitur MVC (Controller & View)
 builder.Services.AddControllersWithViews();
 
+
 // B. Daftarkan Database (SQLite)
 // File database 'smkngawi_web.db' akan otomatis dibuat di folder project
 builder.Services.AddDbContext<AppDbContext>(options => 
@@ -20,6 +22,8 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 // C. Daftarkan Service Logika (Dependency Injection)
 // Agar Controller bisa minta tolong ke RegistrationService
 builder.Services.AddScoped<RegistrationService>();
+builder.Services.AddScoped<AdminService>();
+
 
 
 // ==========================================
@@ -51,5 +55,9 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Student}/{action=Index}/{id?}");
+app.MapControllerRoute(
+    name: "Admin",
+    pattern: "{controller=Admin}");    
+
 
 app.Run();
