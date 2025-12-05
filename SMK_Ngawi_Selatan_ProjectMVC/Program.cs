@@ -4,37 +4,52 @@ using SmkNgawi.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-//daftarkan mvc 
+// ==========================================
+// 1. REGISTER SERVICES (Wadah Alat-Alat)
+// ==========================================
+
+// A. Daftarkan fitur MVC (Controller & View)
 builder.Services.AddControllersWithViews();
 
-//add database 
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlite("data Source=smkngawi_v2.db"));
+// B. Daftarkan Database (SQLite)
+// File database 'smkngawi_web.db' akan otomatis dibuat di folder project
+builder.Services.AddDbContext<AppDbContext>(options => 
+    options.UseSqlite("Data Source=smkngawi_v2.db"));
 
-//add services dengan dependency injection
-//artinya kalau ada kontorler yang butush resgistrion service maka akan dibuat otomatis
+
+// C. Daftarkan Service Logika (Dependency Injection)
+// Agar Controller bisa minta tolong ke RegistrationService
 builder.Services.AddScoped<RegistrationService>();
 
+
+// ==========================================
+// 2. BUILD APP
+// ==========================================
 var app = builder.Build();
 
-//bagaian bawah standard bawaan error throw
+// ==========================================
+// 3. CONFIGURE PIPELINE (Aturan Jalan)
+// ==========================================
+
+// Jika bukan mode developer, pakai penanganan error standar
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    app.UseHsts();    
+    app.UseHsts();
 }
 
+app.UseHttpsRedirection();
+app.UseStaticFiles(); // Agar bisa baca file CSS/JS di folder wwwroot
 
-//app.UseHttpsRedirection();
-app.UseStaticFiles();
 app.UseRouting();
+
 app.UseAuthorization();
 
-
-//routing default control home action index
+// Aturan Rute Default
+// Jika user buka alamat kosong "/", arahkan ke Home -> Index
+// Jika user buka "/Student", arahkan ke Student -> Index
 app.MapControllerRoute(
-    name :"deafault",
-    pattern: "{controller=Home}/{action=Index}/{id}"
-);
+    name: "default",
+    pattern: "{controller=Student}/{action=Index}/{id?}");
 
 app.Run();

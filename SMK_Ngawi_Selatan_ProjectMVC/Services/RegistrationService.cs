@@ -68,10 +68,28 @@ public RegistrationService(AppDbContext context)
 
         // fitur get all student data dengan merturn list
 
-        public List<Student> GetAllStudents()
-        {
-            return _context.Students.ToList();
-        }
+    public List<StudentDetailResponse> GetAllStudents()
+{
+    // 1. Ambil data Entity dari Database
+    var students = _context.Students
+        .Include(s => s.ClassRoom)
+        .ThenInclude(c => c.Major)
+        .ToList();
+
+    // 2. LAKUKAN MAPPING (Entity -> DTO)
+    // Kita ubah bentuk 'Student' menjadi 'StudentDetailResponse'
+    var dtoList = students.Select(s => new StudentDetailResponse
+    {
+        Id = s.Id,
+        FullName = $"{s.FirstName} {s.LastName}",
+        ClassName = s.ClassRoom?.ClassName ?? "Belum Ada Kelas",
+        MajorName = s.ClassRoom?.Major?.MajorName ?? "-",
+        RegistrationDate = s.RegistrationDate
+    }).ToList();
+
+    // 3. Kembalikan list DTO
+    return dtoList;
+}
 
 
 
